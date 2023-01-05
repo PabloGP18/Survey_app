@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_answer_zone_answers",
+  "info": {
+    "displayName": "Answers"
+  },
+  "options": {},
+  "attributes": {
+    "a": {
+      "type": "string"
+    },
+    "b": {
+      "type": "string"
+    }
+  }
+}
