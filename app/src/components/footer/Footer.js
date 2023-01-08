@@ -26,21 +26,61 @@ const Footer = () => {
 		<footer className={styles.footer}>
 			{loading &&
 				footerFromData.map((e) => (
-					<div key={e.id}>
-						<div>{e.text_from}</div>
-						<div>{e.address_from}</div>
-						<div>{e.email_from}</div>
-						<div>{e.number_from}</div>
-					</div>
+					<address key={e.id}>
+						<div className={styles.footer__textFrom}>
+							<a href="https://www.blackboxed.be/">{e.text_from}</a>
+						</div>
+						<div className={styles.footer__addressFrom}>
+							<a href={`https://www.google.be/maps/search/${e.address_from}`}>
+								{e.address_from}
+							</a>
+						</div>
+						<div className={styles.footer__mailFrom}>
+							<a
+								className={styles.footer__mailFrom_mail}
+								href={`mailto:${e.email_from}`}
+							>
+								{e.email_from}
+							</a>
+						</div>
+						<div className={styles.footer__numberFrom}>
+							<a
+								className={styles.footer__numberFrom_number}
+								href={`tel:${e.number_from}`}
+							>
+								{e.number_from}
+							</a>
+						</div>
+					</address>
 				))}
 			{loading &&
 				footerForData.map((e) => (
-					<div key={e.id}>
-						<div>{e.text_for}</div>
-						<div>{e.address_for}</div>
-						<div>{e.email_for}</div>
-						<div>{e.number_for}</div>
-					</div>
+					<address key={e.id}>
+						<div className={styles.footer__textFor}>
+							<a href="https://www.kdg.be/">{e.text_for}</a>
+						</div>
+						<div className={styles.footer__addressFor}>
+							<a href={`https://www.google.be/maps/search/${e.address_for}`}>
+								{e.address_for}
+							</a>
+						</div>
+						<div className={styles.footer__mailFor}>
+							<a
+								className={styles.footer__mailFor_mail}
+								href={`mailto:${e.email_for}`}
+							>
+								{e.email_for}
+							</a>
+						</div>
+						<div className={styles.footer__numberFor}>
+							<a
+								className={styles.footer__numberFor_number}
+								href={`tel:${e.number_for}`}
+							>
+								{e.number_for}
+							</a>
+						</div>
+					</address>
 				))}
 		</footer>
 	)
