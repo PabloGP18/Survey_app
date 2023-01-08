@@ -1,0 +1,33 @@
+.question_answerForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+	border-radius: 5px;
+	width: 30rem;
+	height: 20rem;
+	margin: 10rem;
+	flex-grow: 1;
+	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.container_Fields {
+	display: flex;
+	flex-direction: column;
+	margin: 0.5rem;
+}
+
+.button_question {
+	width: 200px;
+	padding: 10px;
+	border-radius: 4px;
+	border-color: #eee;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+.question_field {
+	margin-bottom: 20px;
+}

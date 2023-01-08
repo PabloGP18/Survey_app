@@ -12,10 +12,15 @@ const putAnswers = (id, data) => {
 	return http.put(`/responses/${id}`, data)
 }
 
+const getHomePage = () => {
+	return http.get('/homepage/?populate=*')
+}
+
 const CrudServices = {
 	getAll,
 	postRegistrationAndCredentials,
 	putAnswers,
+	getHomePage,
 }
 
 export default CrudServices
