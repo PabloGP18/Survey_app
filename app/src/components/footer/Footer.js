@@ -12,7 +12,7 @@ const Footer = () => {
 		try {
 			await CrudServices.getHomePage().then((response) => {
 				setFooterFromData([response.data?.data.attributes.footer_from])
-				setFooterForData([response.data.data.attributes.footer_for])
+				setFooterForData([response.data?.data.attributes.footer_for])
 				setLoading(true)
 			})
 		} catch (error) {

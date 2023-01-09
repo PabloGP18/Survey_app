@@ -63,7 +63,7 @@ const Question = ({
 							onChange={onChange}
 						/>
 					</div>
-					<div className={styles.container_inputField}>
+					{/* <div className={styles.container_inputField}>
 						<InputField
 							className={styles.question_field}
 							labelText={answersData.c}
@@ -86,7 +86,7 @@ const Question = ({
 							onChange={onChange}
 							// onChange={(e) => handleInput(e)}
 						/>
-					</div>
+					</div> */}
 				</div>
 
 				<Button

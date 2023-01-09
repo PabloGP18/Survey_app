@@ -1,7 +1,7 @@
 import http from '../axios/http'
 
-const getAll = () => {
-	return http.get('/questions')
+const getAllQuestions = (id) => {
+	return http.get(`/questions/${id}/?populate=*`)
 }
 
 const postRegistrationAndCredentials = (data) => {
@@ -17,7 +17,7 @@ const getHomePage = () => {
 }
 
 const CrudServices = {
-	getAll,
+	getAllQuestions,
 	postRegistrationAndCredentials,
 	putAnswers,
 	getHomePage,
