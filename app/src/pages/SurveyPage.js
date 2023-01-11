@@ -11,7 +11,7 @@ const SurveyPage = () => {
 	const [loading, setLoading] = useState(true)
 	const [counter, setCounter] = useState(1)
 	// const [test, setTest] = useState([])
-	const [val, setVal] = useState(0)
+	const [val, setVal] = useState('')
 	const [res, setRes] = useState({
 		response1: '',
 		response2: '',
@@ -61,6 +61,8 @@ const SurveyPage = () => {
 	}
 	const handleSubmit = async (event) => {
 		event.preventDefault()
+		try {
+		} catch (error) {}
 		// try {
 		// 	const resp = await axios.put(
 		// 		`http://localhost:1337/api/responses/${test}`,
@@ -89,12 +91,28 @@ const SurveyPage = () => {
 		// 	console.log(error)
 		// }
 	}
+	const addToResponse = async () => {
+		try {
+			await CrudServices.postAnswers({
+				data: {
+					surveyResponse: res.response1,
+				},
+			})
+		} catch (error) {
+			console.log(error.response.message)
+		}
+	}
 
 	const handleNextQuestion = () => {
+		addToResponse(res)
 		setCounter(counter + 1)
 		setVal(`response${counter}`)
+		if (val === 'response6') {
+			navigate('/thank-you')
+		}
 		console.log(val)
 		getQuestion(counter)
+		console.log(res)
 	}
 
 	const handleChange = (event) => {
@@ -102,12 +120,12 @@ const SurveyPage = () => {
 			...prevState,
 			[event.target.name]: event.target.value,
 		}))
-		console.log(res)
 	}
 
 	useEffect(() => {
-		getQuestion(1)
+		getQuestion()
 		handleNextQuestion()
+
 		// setTest()
 	}, [])
 

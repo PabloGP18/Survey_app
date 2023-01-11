@@ -66,6 +66,8 @@ const RegisterForm = () => {
 			setValid(true)
 		}
 		setSubmitted(true)
+		addToResponse()
+		addToDb()
 	}
 
 	// Function to rout onClick to the survey page with useNavigate
@@ -92,6 +94,18 @@ const RegisterForm = () => {
 		}
 	}
 
+	const addToResponse = async () => {
+		try {
+			await CrudServices.postAnswers({
+				data: {
+					email: data.email,
+				},
+			})
+		} catch (error) {
+			console.log(error.response.message)
+		}
+	}
+
 	return (
 		<>
 			<form className={styles.register_form} onSubmit={(e) => handleSubmit(e)}>
@@ -101,7 +115,7 @@ const RegisterForm = () => {
 				!errorEmail &&
 				!genericError ? (
 					<>
-						<span id={styles.start}>
+						<span className={styles.start}>
 							Hello {data.username}, thanks for registering. Please click the
 							button to start the survey
 						</span>
@@ -173,7 +187,6 @@ const RegisterForm = () => {
 							disabled={false}
 							className={styles.button_register}
 							buttonText="Register"
-							onClick={() => addToDb()}
 						/>
 
 						{(valid && !errorEmail) || (valid && genericError) ? (
@@ -184,7 +197,13 @@ const RegisterForm = () => {
 					</>
 				)}
 			</form>
-			<p onClick={handleLogin}>Already registered click here to login</p>
+			<p>
+				Already registered click{' '}
+				<span onClick={handleLogin} className={styles.here}>
+					here{' '}
+				</span>{' '}
+				to login
+			</p>
 		</>
 	)
 }

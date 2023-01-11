@@ -9,8 +9,8 @@ const registration = (data) => {
 	return axiosInstance.post('/auth/local/register', data)
 }
 
-const putAnswers = (id, data) => {
-	return axiosInstance.put(`/responses/${id}`, data)
+const postAnswers = (data) => {
+	return axiosInstance.post(`/responses/`, data)
 }
 
 const getHomePage = () => {
@@ -24,7 +24,7 @@ const getUser = (data) => {
 const CrudServices = {
 	getAllQuestions,
 	registration,
-	putAnswers,
+	postAnswers,
 	getHomePage,
 	getUser,
 }

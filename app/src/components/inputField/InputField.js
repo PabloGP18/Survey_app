@@ -13,6 +13,7 @@ const InputField = ({
 	disabled,
 	error = null,
 	display,
+	required,
 }) => {
 	return (
 		<label htmlFor={id}>
@@ -26,6 +27,7 @@ const InputField = ({
 				value={value}
 				onChange={(e) => onChange(e)}
 				display={display}
+				required={required}
 			/>
 			<span
 				className={`${styles.label} ${error && styles.error} ${
