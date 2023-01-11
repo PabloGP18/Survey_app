@@ -4,8 +4,8 @@ const getAllQuestions = (id) => {
 	return http.get(`/questions/${id}/?populate=*`)
 }
 
-const postRegistrationAndCredentials = (data) => {
-	return http.post('/responses', data)
+const registration = (data) => {
+	return http.post('/auth/local/register', data)
 }
 
 const putAnswers = (id, data) => {
@@ -16,11 +16,16 @@ const getHomePage = () => {
 	return http.get('/homepage/?populate=*')
 }
 
+const getUser = (data) => {
+	return http.post('/auth/local', data)
+}
+
 const CrudServices = {
 	getAllQuestions,
-	postRegistrationAndCredentials,
+	registration,
 	putAnswers,
 	getHomePage,
+	getUser,
 }
 
 export default CrudServices

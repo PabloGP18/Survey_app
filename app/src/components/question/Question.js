@@ -93,7 +93,7 @@ const Question = ({
 					disabled={false}
 					className={styles.button_question}
 					buttonText="Next"
-					onClick={handleNextQuestion}
+					onClick={(e) => handleNextQuestion(e)}
 				/>
 			</form>
 

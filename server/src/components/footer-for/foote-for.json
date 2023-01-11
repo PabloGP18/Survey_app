@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_footer_for_foote_fors",
+  "info": {
+    "displayName": "Foote-for",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text_for": {
+      "type": "string"
+    },
+    "address_for": {
+      "type": "string"
+    },
+    "number_for": {
+      "type": "string"
+    },
+    "email_for": {
+      "type": "string"
+    }
+  }
+}

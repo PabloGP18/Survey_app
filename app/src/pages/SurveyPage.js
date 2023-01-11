@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
 import React, { useState, useEffect } from 'react'
 import CrudServices from '../services/CrudServices'
+import { getToken } from '../Auth/helpers'
 import Question from '../components/question/Question'
 import styles from './surveyPage.module.scss'
 
@@ -17,6 +19,9 @@ const SurveyPage = () => {
 		response5: '',
 		response6: '',
 	})
+
+	const token = getToken()
+	console.log(token)
 
 	const getQuestion = async (id) => {
 		try {

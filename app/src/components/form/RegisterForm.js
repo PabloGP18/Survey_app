@@ -1,17 +1,18 @@
 /* eslint-disable max-lines */
 
 import React, { useState } from 'react'
-import axios from 'axios'
 import { useNavigate } from 'react-router'
+import CrudServices from '../../services/CrudServices'
 import InputField from '../inputField/InputField'
 import Button from '../button/Button'
 import styles from './registerForm.module.scss'
+import { setToken } from '../../Auth/helpers'
 
 const RegisterForm = () => {
 	// State where al the data gets stored from the form
 	const [data, setData] = useState({
-		firstName: '',
-		lastName: '',
+		username: '',
+		password: '',
 		email: '',
 	})
 
@@ -52,8 +53,8 @@ const RegisterForm = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault()
 		if (
-			data.firstName &&
-			data.lastName &&
+			data.username &&
+			data.password &&
 			data.email &&
 			!errorEmail &&
 			!genericError
@@ -74,13 +75,9 @@ const RegisterForm = () => {
 		setErrorEmail(null)
 		setGenericError(null)
 		try {
-			await axios.post(`http://localhost:1337/api/responses/`, {
-				data: {
-					email: data.email,
-					firstName: data.firstName,
-					lastName: data.lastName,
-				},
-			})
+			const response = await CrudServices.registration(data)
+			setToken(response.data.jwt)
+			console.log(response.data.jwt)
 		} catch (error) {
 			setErrorEmail(
 				`${
@@ -94,13 +91,13 @@ const RegisterForm = () => {
 	return (
 		<form className={styles.register_form} onSubmit={(e) => handleSubmit(e)}>
 			{submitted &&
-			data.firstName &&
-			data.lastName &&
+			data.username &&
+			data.password &&
 			!errorEmail &&
 			!genericError ? (
 				<>
 					<span id={styles.start}>
-						Hello {data.firstName}, thanks for registering. Please click the
+						Hello {data.username}, thanks for registering. Please click the
 						button to start the survey
 					</span>
 					<Button
@@ -121,13 +118,13 @@ const RegisterForm = () => {
 							id="first-name"
 							className={styles.form_field}
 							type="text"
-							placeholder="First Name"
-							name="firstName"
-							value={data.firstName}
+							placeholder="username"
+							name="username"
+							value={data.username}
 							onChange={(e) => handleInput(e)}
 							labelText={undefined}
 						/>
-						{submitted && !data.firstName && (
+						{submitted && !data.username && (
 							<span id="last-name-error">Please enter a first name</span>
 						)}
 					</div>
@@ -135,16 +132,16 @@ const RegisterForm = () => {
 					<div className={styles.container_inputField}>
 						<InputField
 							display="none"
-							id="last-name"
+							id="password"
 							className={styles.form_field}
 							type="text"
-							placeholder="Last Name"
-							name="lastName"
-							value={data.lastName}
+							placeholder="password"
+							name="password"
+							value={data.password}
 							onChange={(e) => handleInput(e)}
 							labelText={undefined}
 						/>
-						{submitted && !data.lastName && (
+						{submitted && !data.password && (
 							<span id="last-name-error">Please enter a last name</span>
 						)}
 					</div>

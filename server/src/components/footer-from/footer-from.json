@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_footer_from_footer_froms",
+  "info": {
+    "displayName": "footer_from",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text_from": {
+      "type": "string"
+    },
+    "address_from": {
+      "type": "string"
+    },
+    "email_from": {
+      "type": "string"
+    },
+    "number_from": {
+      "type": "string"
+    }
+  }
+}
