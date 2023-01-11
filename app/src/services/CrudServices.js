@@ -1,23 +1,24 @@
-import http from '../axios/http'
+// import http from '../axios/http'
+import axiosInstance from '../axios/http'
 
 const getAllQuestions = (id) => {
-	return http.get(`/questions/${id}/?populate=*`)
+	return axiosInstance.get(`/questions/${id}/?populate=*`)
 }
 
 const registration = (data) => {
-	return http.post('/auth/local/register', data)
+	return axiosInstance.post('/auth/local/register', data)
 }
 
 const putAnswers = (id, data) => {
-	return http.put(`/responses/${id}`, data)
+	return axiosInstance.put(`/responses/${id}`, data)
 }
 
 const getHomePage = () => {
-	return http.get('/homepage/?populate=*')
+	return axiosInstance.get('/homepage/?populate=*')
 }
 
 const getUser = (data) => {
-	return http.post('/auth/local', data)
+	return axiosInstance.post('/auth/local', data)
 }
 
 const CrudServices = {

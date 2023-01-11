@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import CrudServices from '../../services/CrudServices'
 // import { useAuthContext } from '../../Auth/AuthContext'
-// import { removeToken } from '../../Auth/helpers'
+import { removeToken, getToken } from '../../Auth/helpers'
 // import Button from '../button/Button'
 import styles from './header.module.scss'
 import Button from '../button/Button'
@@ -21,12 +21,13 @@ const Header = () => {
 
 	const navigate = useNavigate()
 
-	const handleLogin = () => {
-		navigate('/login')
-	}
+	const token = getToken()
+
+	// console.log(token)
 
 	const handleLogout = () => {
 		navigate('/')
+		removeToken()
 	}
 
 	const headerData = async () => {
@@ -48,12 +49,31 @@ const Header = () => {
 		<>
 			<div className={styles.header_container}>
 				<h1 className={styles.title}>{title}</h1>
-				<Button
-					disabled={false}
-					className={styles.button_register}
-					buttonText="Login"
-					onClick={() => handleLogin()}
-				/>
+			</div>
+			<div className={styles.header__button}>
+				{token && (
+					<Button
+						disabled={false}
+						className={styles.button_logout}
+						buttonText="Logout"
+						onClick={() => handleLogout()}
+					/>
+				)}
+				{/* {token ? (
+					<Button
+						disabled={false}
+						className={styles.button_logout}
+						buttonText="Logout"
+						onClick={() => handleLogout()}
+					/>
+				) : (
+					<Button
+						disabled={false}
+						className={styles.button_login}
+						buttonText="Login"
+						onClick={() => handleLogin()}
+					/>
+				)} */}
 			</div>
 
 			{/* {user ? (

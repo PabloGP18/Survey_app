@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import CrudServices from '../../services/CrudServices'
+import { setToken } from '../../Auth/helpers'
 import InputField from '../inputField/InputField'
 import Button from '../button/Button'
 import styles from './loginForm.module.scss'
@@ -23,13 +24,17 @@ const LoginForm = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		navigate('/survey')
+		getUserFromDB()
+
+		// setTimeout(5000, navigate('/survey'))
 	}
 
 	const getUserFromDB = async () => {
 		try {
-			const response = await CrudServices.getUser(data)
-			console.log(response)
+			await CrudServices.getUser(data).then((response) => {
+				setToken(response.data.jwt)
+				navigate('/survey')
+			})
 		} catch (error) {
 			console.log(error.response)
 		}
@@ -72,7 +77,6 @@ const LoginForm = () => {
 				disabled={false}
 				className={styles.button_register}
 				buttonText="Login"
-				onClick={() => getUserFromDB()}
 			/>
 		</form>
 	)

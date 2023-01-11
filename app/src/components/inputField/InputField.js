@@ -16,13 +16,6 @@ const InputField = ({
 }) => {
 	return (
 		<label htmlFor={id}>
-			<span
-				className={`${styles.label} ${error && styles.error} ${
-					disabled && styles.disabled
-				}`}
-			>
-				{labelText}
-			</span>
 			<input
 				disabled={disabled}
 				id={id}
@@ -34,6 +27,13 @@ const InputField = ({
 				onChange={(e) => onChange(e)}
 				display={display}
 			/>
+			<span
+				className={`${styles.label} ${error && styles.error} ${
+					disabled && styles.disabled
+				}`}
+			>
+				{labelText}
+			</span>
 		</label>
 	)
 }

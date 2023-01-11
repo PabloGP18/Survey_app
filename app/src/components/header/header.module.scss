@@ -11,3 +11,29 @@
 	font-size: 70px;
 	color: white;
 }
+
+.header__button {
+	text-align: end;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.button_login {
+	width: 100px;
+	padding: 10px;
+	border-radius: 4px;
+	border-color: #eee;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+.button_logout {
+	width: 100px;
+	padding: 10px;
+	border-radius: 4px;
+	border-color: #eee;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}

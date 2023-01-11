@@ -39,30 +39,30 @@ const Question = ({
 	return (
 		<>
 			<form className={styles.question_answerForm} onSubmit={handleSubmit}>
-				<h4>{questionData}</h4>
+				<div className={styles.question__question}>
+					<h4>{questionData}</h4>
+				</div>
 				<div className={styles.container_Fields}>
-					<div className={styles.container_inputField}>
-						<InputField
-							className={styles.question_field}
-							labelText={answersData.a}
-							type="radio"
-							id="answer_a"
-							name={name}
-							value={value.a}
-							onChange={onChange}
-						/>
-					</div>
-					<div className={styles.container_inputField}>
-						<InputField
-							className={styles.question_field}
-							labelText={answersData.b}
-							type="radio"
-							id="answer_b"
-							name={name}
-							value={value.b}
-							onChange={onChange}
-						/>
-					</div>
+					<InputField
+						className={styles.question_field}
+						labelText={answersData.a}
+						type="radio"
+						id="answer_a"
+						name={name}
+						value={value.a}
+						onChange={onChange}
+						required
+					/>
+
+					<InputField
+						className={styles.question_field}
+						labelText={answersData.b}
+						type="radio"
+						id="answer_b"
+						name={name}
+						value={value.b}
+						onChange={onChange}
+					/>
 					{/* <div className={styles.container_inputField}>
 						<InputField
 							className={styles.question_field}

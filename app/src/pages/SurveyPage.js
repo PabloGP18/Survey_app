@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import CrudServices from '../services/CrudServices'
 import { getToken } from '../Auth/helpers'
 import Question from '../components/question/Question'
@@ -23,6 +24,8 @@ const SurveyPage = () => {
 	const token = getToken()
 	console.log(token)
 
+	const navigate = useNavigate()
+
 	const getQuestion = async (id) => {
 		try {
 			await CrudServices.getAllQuestions(id).then((response) => {
@@ -32,6 +35,9 @@ const SurveyPage = () => {
 			})
 		} catch (error) {
 			console.error(error.response)
+			if (!token) {
+				navigate('/error')
+			}
 		}
 		// try {
 		// 	await axios

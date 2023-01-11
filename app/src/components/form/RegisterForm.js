@@ -40,6 +40,10 @@ const RegisterForm = () => {
 	// Using useNavigate from react-router
 	const navigate = useNavigate()
 
+	const handleLogin = () => {
+		navigate('/login')
+	}
+
 	// Function to set the input values to the setData state
 	const handleInput = (event) => {
 		setData((prevState) => ({
@@ -77,7 +81,7 @@ const RegisterForm = () => {
 		try {
 			const response = await CrudServices.registration(data)
 			setToken(response.data.jwt)
-			console.log(response.data.jwt)
+			// console.log(response.data.jwt)
 		} catch (error) {
 			setErrorEmail(
 				`${
@@ -89,96 +93,99 @@ const RegisterForm = () => {
 	}
 
 	return (
-		<form className={styles.register_form} onSubmit={(e) => handleSubmit(e)}>
-			{submitted &&
-			data.username &&
-			data.password &&
-			!errorEmail &&
-			!genericError ? (
-				<>
-					<span id={styles.start}>
-						Hello {data.username}, thanks for registering. Please click the
-						button to start the survey
-					</span>
-					<Button
-						disabled={false}
-						className={styles.button_start}
-						buttonText="Start Survey"
-						onClick={(e) => startSurvey(e)}
-					/>
-				</>
-			) : (
-				<>
-					<div className={styles.title_form}>
-						<h2>Please register</h2>
-					</div>
-					<div className={styles.container_inputField}>
-						<InputField
-							display="none"
-							id="first-name"
-							className={styles.form_field}
-							type="text"
-							placeholder="username"
-							name="username"
-							value={data.username}
-							onChange={(e) => handleInput(e)}
-							labelText={undefined}
+		<>
+			<form className={styles.register_form} onSubmit={(e) => handleSubmit(e)}>
+				{submitted &&
+				data.username &&
+				data.password &&
+				!errorEmail &&
+				!genericError ? (
+					<>
+						<span id={styles.start}>
+							Hello {data.username}, thanks for registering. Please click the
+							button to start the survey
+						</span>
+						<Button
+							disabled={false}
+							className={styles.button_start}
+							buttonText="Start Survey"
+							onClick={(e) => startSurvey(e)}
 						/>
-						{submitted && !data.username && (
-							<span id="last-name-error">Please enter a first name</span>
-						)}
-					</div>
+					</>
+				) : (
+					<>
+						<div className={styles.title_form}>
+							<h2>Please register</h2>
+						</div>
+						<div className={styles.container_inputField}>
+							<InputField
+								display="none"
+								id="first-name"
+								className={styles.form_field}
+								type="text"
+								placeholder="username"
+								name="username"
+								value={data.username}
+								onChange={(e) => handleInput(e)}
+								labelText={undefined}
+							/>
+							{submitted && !data.username && (
+								<span id="last-name-error">Please enter a first name</span>
+							)}
+						</div>
 
-					<div className={styles.container_inputField}>
-						<InputField
-							display="none"
-							id="password"
-							className={styles.form_field}
-							type="text"
-							placeholder="password"
-							name="password"
-							value={data.password}
-							onChange={(e) => handleInput(e)}
-							labelText={undefined}
+						<div className={styles.container_inputField}>
+							<InputField
+								display="none"
+								id="password"
+								className={styles.form_field}
+								type="text"
+								placeholder="password"
+								name="password"
+								value={data.password}
+								onChange={(e) => handleInput(e)}
+								labelText={undefined}
+							/>
+							{submitted && !data.password && (
+								<span id="last-name-error">Please enter a last name</span>
+							)}
+						</div>
+
+						<div className={styles.container_inputField}>
+							<InputField
+								display="none"
+								id="email"
+								className={styles.form_field}
+								type="text"
+								placeholder="Email"
+								name="email"
+								value={data.email}
+								onChange={(e) => handleInput(e)}
+								labelText={undefined}
+								error={errorEmail}
+							/>
+							{submitted && !data.email && (
+								<span id="email-error">Please enter an email address</span>
+							)}
+						</div>
+
+						<Button
+							disabled={false}
+							className={styles.button_register}
+							buttonText="Register"
+							onClick={() => addToDb()}
 						/>
-						{submitted && !data.password && (
-							<span id="last-name-error">Please enter a last name</span>
+
+						{(valid && !errorEmail) || (valid && genericError) ? (
+							<p>{errorEmail}</p>
+						) : (
+							<p>{genericError}</p>
 						)}
-					</div>
-
-					<div className={styles.container_inputField}>
-						<InputField
-							display="none"
-							id="email"
-							className={styles.form_field}
-							type="text"
-							placeholder="Email"
-							name="email"
-							value={data.email}
-							onChange={(e) => handleInput(e)}
-							labelText={undefined}
-							error={errorEmail}
-						/>
-						{submitted && !data.email && (
-							<span id="email-error">Please enter an email address</span>
-						)}
-					</div>
-
-					<Button
-						disabled={false}
-						className={styles.button_register}
-						buttonText="Register"
-						onClick={() => addToDb()}
-					/>
-
-					{(valid && !errorEmail) || (valid && genericError) ? (
-						<p>{errorEmail}</p>
-					) : (
-						<p>{genericError}</p>
-					)}
-				</>
-			)}
-		</form>
+					</>
+				)}
+			</form>
+			<p onClick={handleLogin}>Already registered click here to login</p>
+		</>
 	)
 }
 
