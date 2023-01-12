@@ -1,0 +1,68 @@
+.register_form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+	border-radius: 5px;
+	margin-top: 7rem;
+	flex-grow: 1;
+	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.container_inputField {
+	display: flex;
+	margin: 0.5rem;
+}
+
+.form_field {
+	width: 400px;
+	height: 40px;
+	outline: none;
+	background-color: whitesmoke;
+	border: none;
+	padding-left: 20px;
+}
+
+.button_register {
+	margin-bottom: 50px;
+	margin-top: 40px;
+	width: 200px;
+	padding: 10px;
+	border-radius: 4px;
+	border-color: #eee;
+	background-color: black;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+
+#startSurvey_text {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 50px;
+}
+
+.button_start {
+	width: 200px;
+	padding: 10px;
+	border-radius: 4px;
+	border-color: #eee;
+	background-color: black;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+
+.here {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.start {
+	padding: 80px;
+	margin-bottom: 30px;
+}
+.button_start {
+	margin-bottom: 40px;
+}
