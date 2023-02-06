@@ -8,7 +8,7 @@ import styles from './loginForm.module.scss'
 import { UserContext } from '../../context/UserContext'
 
 const LoginForm = () => {
-	const { loginData, setLoginData, setEmail } = useContext(UserContext)
+	const { loginData, setLoginData, setEmailUser } = useContext(UserContext)
 
 	const element = useRef()
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
 			await CrudServices.getUser(loginData).then((response) => {
 				setToken(response.data.jwt)
 				navigate('/survey')
-				setEmail(response.data.user.email)
+				setEmailUser(response.data.user.email)
 				element.current.style.display = 'none'
 				console.log(response.data.user.email)
 			})

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import CrudServices from '../services/CrudServices'
@@ -15,7 +14,8 @@ const SurveyPage = () => {
 	const [counter, setCounter] = useState(1)
 	const [val, setVal] = useState('')
 
-	const { responseSurvey, setResponseSurvey, email } = useContext(UserContext)
+	const { responseSurvey, setResponseSurvey, emailUser } =
+		useContext(UserContext)
 
 	const token = getToken()
 
@@ -54,7 +54,7 @@ const SurveyPage = () => {
 		try {
 			await CrudServices.postAnswers({
 				data: {
-					email: email,
+					email: emailUser,
 					surveyResponse: responseSurvey,
 				},
 			})
@@ -76,10 +76,6 @@ const SurveyPage = () => {
 		}
 		setResponseSurvey((oldArray) => [...oldArray, newQuestion])
 		console.log(responseSurvey)
-
-		if (responseSurvey[0].answer === 'ja') {
-			getQuestion(3)
-		}
 	}
 
 	useEffect(() => {

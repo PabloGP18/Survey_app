@@ -1,9 +1,8 @@
-import { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 
 export const UserContext = createContext(null)
 
 export const UserContextProvider = ({ children }) => {
-	// State where al the data gets stored from the form
 	const [dataRegister, setDataRegister] = useState({
 		username: '',
 		password: '',
@@ -15,7 +14,7 @@ export const UserContextProvider = ({ children }) => {
 		password: '',
 	})
 
-	const [email, setEmail] = useState({ email: '' })
+	const [emailUser, setEmailUser] = useState({ email: '' })
 	const [responseSurvey, setResponseSurvey] = useState([])
 
 	const value = {
@@ -25,8 +24,8 @@ export const UserContextProvider = ({ children }) => {
 		setResponseSurvey,
 		loginData,
 		setLoginData,
-		email,
-		setEmail,
+		emailUser,
+		setEmailUser,
 	}
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>
