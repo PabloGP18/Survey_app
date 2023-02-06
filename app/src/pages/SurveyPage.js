@@ -76,6 +76,10 @@ const SurveyPage = () => {
 		}
 		setResponseSurvey((oldArray) => [...oldArray, newQuestion])
 		console.log(responseSurvey)
+
+		if (responseSurvey[0].answer === 'ja') {
+			getQuestion(3)
+		}
 	}
 
 	useEffect(() => {
