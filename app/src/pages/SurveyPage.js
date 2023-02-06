@@ -10,7 +10,6 @@ import { UserContext } from '../context/UserContext'
 const SurveyPage = () => {
 	const [apiData, setApiData] = useState([])
 	const [loading, setLoading] = useState(true)
-	const [checked, setChecked] = useState(true)
 	const [counter, setCounter] = useState(1)
 	const [val, setVal] = useState('')
 
@@ -24,7 +23,7 @@ const SurveyPage = () => {
 	const getQuestion = async (id) => {
 		try {
 			await CrudServices.getAllQuestions(id).then((response) => {
-				setApiData(response.data.data.attributes)
+				setApiData(response.data?.data.attributes)
 				setLoading(false)
 			})
 		} catch (error) {
@@ -36,13 +35,11 @@ const SurveyPage = () => {
 	}
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		setChecked(false)
 		setCounter(counter + 1)
-		getQuestion(counter)
-
 		if (counter === 6) {
 			addToResponse()
 		}
+		getQuestion(counter)
 
 		setVal(`response${counter}`)
 		if (val === 'response6') {
@@ -58,7 +55,6 @@ const SurveyPage = () => {
 					surveyResponse: responseSurvey,
 				},
 			})
-			setResponseSurvey([])
 		} catch (error) {
 			console.log(error.response.message)
 		}
@@ -75,13 +71,12 @@ const SurveyPage = () => {
 			answer: event.target.value,
 		}
 		setResponseSurvey((oldArray) => [...oldArray, newQuestion])
-		console.log(responseSurvey)
 	}
 
 	useEffect(() => {
 		getQuestion(counter)
-		setResponseSurvey(responseSurvey)
-	}, [checked, responseSurvey])
+		setResponseSurvey('')
+	}, [])
 
 	return (
 		<div>
@@ -100,13 +95,12 @@ const SurveyPage = () => {
 					<p className={styles.loading}>loading...</p>
 				) : (
 					<Question
-						questionData={apiData.question}
-						answersData={apiData.Answers[0]}
+						questionData={apiData?.question}
+						answersData={apiData?.Answers[0]}
 						handleSubmit={(e) => handleSubmit(e)}
-						value={apiData.Answers[0]}
+						value={apiData?.Answers[0]}
 						onChange={(e) => handleChange(e)}
-						name={apiData.question}
-						checked={checked}
+						name={apiData?.question}
 					/>
 				)}
 			</div>

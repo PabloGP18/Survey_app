@@ -12,7 +12,6 @@ const Question = ({
 	value,
 	onChange,
 	name,
-	checked,
 }) => {
 	return (
 		<form className={styles.question_answerForm} onSubmit={handleSubmit}>
@@ -23,23 +22,21 @@ const Question = ({
 				<InputField
 					className={styles.question_field}
 					labelText={answersData.a}
-					type="checkbox"
+					type="radio"
 					id="response1"
 					name={questionData}
 					value={value.a}
 					onChange={onChange}
-					checked={checked}
 				/>
 
 				<InputField
 					className={styles.question_field}
 					labelText={answersData.b}
-					type="checkbox"
+					type="radio"
 					id="response2"
 					name={name}
 					value={value.b}
 					onChange={onChange}
-					checked={checked}
 				/>
 			</div>
 
