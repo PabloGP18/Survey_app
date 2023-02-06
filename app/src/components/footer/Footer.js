@@ -6,7 +6,6 @@ const Footer = () => {
 	const [footerFromData, setFooterFromData] = useState([])
 	const [footerForData, setFooterForData] = useState([])
 	const [loading, setLoading] = useState(false)
-	// const [footerForData, setFooterForData] = useState('')
 
 	const footerData = async () => {
 		try {

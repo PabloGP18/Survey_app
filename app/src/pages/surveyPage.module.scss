@@ -8,3 +8,17 @@
 	flex-direction: column;
 	align-items: center;
 }
+.button_logout {
+	width: 100px;
+	padding: 10px;
+	border-radius: 4px;
+	border-color: #eee;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+.header__button {
+	text-align: end;
+	margin-top: 5px;
+	margin-right: 5px;
+}

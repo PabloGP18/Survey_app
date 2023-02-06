@@ -4,7 +4,8 @@
   "info": {
     "singularName": "response",
     "pluralName": "responses",
-    "displayName": "Response"
+    "displayName": "Response",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,11 +15,8 @@
     "email": {
       "type": "string"
     },
-    "surveyQuestion": {
-      "type": "string"
-    },
     "surveyResponse": {
-      "type": "string"
+      "type": "json"
     }
   }
 }

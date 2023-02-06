@@ -1,28 +1,23 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import CrudServices from '../services/CrudServices'
-import { getToken } from '../Auth/helpers'
+import { getToken, removeToken } from '../Auth/helpers'
+import Button from '../components/button/Button'
 import Question from '../components/question/Question'
 import styles from './surveyPage.module.scss'
+import { UserContext } from '../context/UserContext'
 
 const SurveyPage = () => {
 	const [apiData, setApiData] = useState([])
 	const [loading, setLoading] = useState(true)
+	const [checked, setChecked] = useState(true)
 	const [counter, setCounter] = useState(1)
-	// const [test, setTest] = useState([])
 	const [val, setVal] = useState('')
-	const [res, setRes] = useState({
-		response1: '',
-		response2: '',
-		response3: '',
-		response4: '',
-		response5: '',
-		response6: '',
-	})
+
+	const { responseSurvey, setResponseSurvey, email } = useContext(UserContext)
 
 	const token = getToken()
-	console.log(token)
 
 	const navigate = useNavigate()
 
@@ -30,7 +25,6 @@ const SurveyPage = () => {
 		try {
 			await CrudServices.getAllQuestions(id).then((response) => {
 				setApiData(response.data.data.attributes)
-				console.log(response.data.data.attributes.question)
 				setLoading(false)
 			})
 		} catch (error) {
@@ -39,111 +33,83 @@ const SurveyPage = () => {
 				navigate('/error')
 			}
 		}
-		// try {
-		// 	await axios
-		// 		.get(`http://localhost:1337/api/question${id}s?populate=*`)
-		// 		.then((response) => {
-		// 			// console.log('data:', response)
-		// 			setApiData(response)
-		// 			setLoading(false)
-		// 			console.log(
-		// 				'path to question:',
-		// 				response.data.data[0].attributes.question
-		// 			)
-		// 			console.log(
-		// 				'path to answers:',
-		// 				response.data.data[0].attributes.answerZone[0].a
-		// 			)
-		// 		})
-		// } catch (error) {
-		// 	console.error(error)
-		// }
 	}
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		try {
-		} catch (error) {}
-		// try {
-		// 	const resp = await axios.put(
-		// 		`http://localhost:1337/api/responses/${test}`,
-		// 		{
-		// 			data: {
-		// 				surveyResponse: [
-		// 					{
-		// 						__component: 'responses.responses',
-		// 						response1: res.response1,
-		// 						response2: res.response2,
-		// 						response3: res.response3,
-		// 						response4: res.response4,
-		// 						response5: res.response5,
-		// 						response6: res.response6,
-		// 					},
-		// 				],
-		// 			},
-		// 		}
-		// 	)
-		// 	setTest(resp.data.data)(
-		// console.log(resp.data.data[0].id)
-		// 		test[test.length - 1].id
-		// 	)
-		// 	console.log(test)
-		// } catch (error) {
-		// 	console.log(error)
-		// }
+		setChecked(false)
+		setCounter(counter + 1)
+		getQuestion(counter)
+
+		if (counter === 6) {
+			addToResponse()
+		}
+
+		setVal(`response${counter}`)
+		if (val === 'response6') {
+			navigate('/thank-you')
+		}
 	}
+
 	const addToResponse = async () => {
 		try {
 			await CrudServices.postAnswers({
 				data: {
-					surveyResponse: res.response1,
+					email: email,
+					surveyResponse: responseSurvey,
 				},
 			})
+			setResponseSurvey([])
 		} catch (error) {
 			console.log(error.response.message)
 		}
 	}
 
-	const handleNextQuestion = () => {
-		addToResponse(res)
-		setCounter(counter + 1)
-		setVal(`response${counter}`)
-		if (val === 'response6') {
-			navigate('/thank-you')
-		}
-		console.log(val)
-		getQuestion(counter)
-		console.log(res)
+	const handleLogout = () => {
+		navigate('/')
+		removeToken()
 	}
 
 	const handleChange = (event) => {
-		setRes((prevState) => ({
-			...prevState,
-			[event.target.name]: event.target.value,
-		}))
+		const newQuestion = {
+			question: event.target.name,
+			answer: event.target.value,
+		}
+		setResponseSurvey((oldArray) => [...oldArray, newQuestion])
+		console.log(responseSurvey)
 	}
 
 	useEffect(() => {
-		getQuestion()
-		handleNextQuestion()
-
-		// setTest()
-	}, [])
+		getQuestion(counter)
+		setResponseSurvey(responseSurvey)
+	}, [checked, responseSurvey])
 
 	return (
-		<div className={styles.surveyPage}>
-			{loading ? (
-				<p className={styles.loading}>loading...</p>
-			) : (
-				<Question
-					questionData={apiData.question}
-					answersData={apiData.Answers[0]}
-					handleNextQuestion={(e) => handleNextQuestion(e)}
-					handleSubmit={(e) => handleSubmit(e)}
-					value={apiData.Answers[0]}
-					onChange={(e) => handleChange(e)}
-					name={val}
-				/>
-			)}
+		<div>
+			<div className={styles.header__button}>
+				{token && (
+					<Button
+						disabled={false}
+						className={styles.button_logout}
+						buttonText="Logout"
+						onClick={() => handleLogout()}
+					/>
+				)}
+			</div>
+			<div className={styles.surveyPage}>
+				{loading ? (
+					<p className={styles.loading}>loading...</p>
+				) : (
+					<Question
+						questionData={apiData.question}
+						answersData={apiData.Answers[0]}
+						handleSubmit={(e) => handleSubmit(e)}
+						value={apiData.Answers[0]}
+						onChange={(e) => handleChange(e)}
+						name={apiData.question}
+						checked={checked}
+					/>
+				)}
+			</div>
 		</div>
 	)
 }

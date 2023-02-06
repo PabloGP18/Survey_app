@@ -1,4 +1,3 @@
-// import http from '../axios/http'
 import axiosInstance from '../axios/http'
 
 const getAllQuestions = (id) => {

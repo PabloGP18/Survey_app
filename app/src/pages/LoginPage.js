@@ -4,7 +4,7 @@ import styles from './loginpage.module.scss'
 
 const LoginPage = () => {
 	return (
-		<div className={styles.loginepage}>
+		<div className={styles.loginpage}>
 			<LoginForm />
 		</div>
 	)

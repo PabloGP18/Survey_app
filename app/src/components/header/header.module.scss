@@ -5,6 +5,8 @@
 	width: 100%;
 	height: 150px;
 	background-color: black;
+	top: 0;
+	padding: 50px;
 }
 .title {
 	font-weight: 500;
@@ -36,4 +38,10 @@
 	background-color: black;
 	color: white;
 	cursor: pointer;
+}
+
+@media (min-width: 390) {
+	.header_container {
+		padding: 40px !important;
+	}
 }
