@@ -97,12 +97,12 @@ const RegisterForm = () => {
 						onChange={(e) => handleInput(e)}
 						labelText={undefined}
 					/>
-					{submitted && !dataRegister.username && (
-						<span className="error" id="username-error">
-							{errors?.username}
-						</span>
-					)}
 				</div>
+				{submitted && !dataRegister.username && (
+					<span className="error" id="username-error">
+						{errors?.username}
+					</span>
+				)}
 
 				<div className={styles.container_inputField}>
 					<InputField
@@ -116,12 +116,12 @@ const RegisterForm = () => {
 						onChange={(e) => handleInput(e)}
 						labelText={undefined}
 					/>
-					{submitted && !dataRegister.password && (
-						<span className="error" id="password-error">
-							{errors?.password}
-						</span>
-					)}
 				</div>
+				{submitted && !dataRegister.password && (
+					<span className="error" id="password-error">
+						{errors?.password}
+					</span>
+				)}
 
 				<div className={styles.container_inputField}>
 					<InputField
@@ -135,12 +135,12 @@ const RegisterForm = () => {
 						onChange={(e) => handleInput(e)}
 						labelText={undefined}
 					/>
-					{submitted && !dataRegister.email && (
-						<span className="error" id="email-error">
-							{errors?.email}
-						</span>
-					)}
 				</div>
+				{submitted && !dataRegister.email && (
+					<span className="error" id="email-error">
+						{errors?.email}
+					</span>
+				)}
 				{(submitted && errorEmail === 'Email or Username are already taken') ||
 				errorEmail === 'password must be at least 6 characters' ||
 				errorEmail === 'email must be a valid email' ? (
