@@ -5,13 +5,10 @@
 	align-items: center;
 	transition: 0.3s;
 	border-radius: 5px;
-	// width: 30rem;
-	// height: 20rem;
-	margin-top: 6rem;
-	flex-grow: 1;
-	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 30px 4px;
 	padding: 50px;
 	flex-wrap: wrap;
+	margin: auto;
 }
 
 .container_Fields {
@@ -39,4 +36,10 @@
 	justify-content: center;
 	align-items: center;
 	color: black !important;
+}
+@media (max-width: 400px) {
+	.question_answerForm {
+		box-shadow: none;
+		text-align: center;
+	}
 }

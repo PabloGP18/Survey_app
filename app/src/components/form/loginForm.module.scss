@@ -65,3 +65,9 @@
 .button_start {
 	margin-bottom: 40px;
 }
+
+@media (max-width: 500px) {
+	.form_field {
+		width: 300px;
+	}
+}
